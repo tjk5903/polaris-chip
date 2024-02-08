@@ -13,7 +13,7 @@ export class MyCard extends LitElement {
 
   constructor() {
     super();
-    this.title = "My card";
+    this.title = "Penn State Basketball";
     this.image = "https://assets-cms.thescore.com/uploads/image/file/611967/w640xh480_GettyImages-1938930936.jpg?ts=1705467656";
     this.cardText = "Penn State beats Wisconsin!";
   }
@@ -22,6 +22,9 @@ export class MyCard extends LitElement {
     return css`
       :host {
         display: block;
+        border: 1px;
+        display: block;
+        background-color: blue;
       }
 
       a {
@@ -89,8 +92,8 @@ export class MyCard extends LitElement {
 
   render() {
     return html`
-    <div id="cardlist" class="card-list">
-     
+    <div> 
+    <img src="https://assets-cms.thescore.com/uploads/image/file/611967/w640xh480_GettyImages-1938930936.jpg?ts=1705467656">
     </div>`;
   }
 
@@ -101,7 +104,7 @@ export class MyCard extends LitElement {
        //use reflect to duplicate the same image
       bodyText: { type: String },
       link: { type: String },
-      
+    };
   }
 }
 

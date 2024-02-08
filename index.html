@@ -26,22 +26,17 @@
 <body>
   <h1>polaris-chip</h1>
   <!-- this is going to do whatever the tag's defaults are -->
-  <polaris-chip title="Clone card"></polaris-chip>
-  <polaris-chip title="Change title"></polaris-chip>
-  <polaris-chip title="Change image"></polaris-chip>
-  <polaris-chip title="Change background"></polaris-chip>
-  <polaris-chip title="Delete card"></polaris-chip>
-
   <!-- this is going to take the tag and change the title -->
-  <h1>my-card</h1>
-  <div id="cardlist">
-    <div class="card">
-     <img class="card-image"
-         src="https://assets-cms.thescore.com/uploads/image/file/611967/w640xh480_GettyImages-1938930936.jpg?ts=1705467656" alt="Card Image" width="400">
-    
   
-    <div class="card-content">
-      <h2 class="card-title">Penn State beats Wisconsin!</h2>
+  <div class="control-wrapper">
+    <button class="duplicate">Clone Card</button>
+    <button id="changetitle">Change Title</button>
+    <button id="changeimage">Change Image</button>
+    <button id="changebg">Change Background</button>
+    <button id="delete">Delete Card</button>
+  </div>
+  <my-card></my-card>
+    <h2 class="card-title">Penn State beats Wisconsin!</h2>
       <p>Penn State Men's Basketball Team upsets #11 Wisconsin.</p>
     
      <class="btn-wrapper">
