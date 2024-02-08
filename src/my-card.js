@@ -83,8 +83,8 @@ export class MyCard extends LitElement {
     max-width: 100%;
   }
 
-  .card img {
-    max-height: none;
+  img {
+    max-height: 200px;
   }
 }
     `;
