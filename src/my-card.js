@@ -13,21 +13,28 @@ export class MyCard extends LitElement {
 
   constructor() {
     super();
-    this.title = "Penn State Basketball";
+    this.label = "Penn State Sports";
     this.image = "https://assets-cms.thescore.com/uploads/image/file/611967/w640xh480_GettyImages-1938930936.jpg?ts=1705467656";
-    this.cardText = "Penn State beats Wisconsin!";
+    this.bodyText = "Penn State beats Wisconsin!";
+    this.description = '';
+    this.fancy = false;
   }
 
   static get styles() {
     return css`
       :host {
         display: block;
-        border: 1px;
-        display: block;
-        background-color: blue;
+        border: 1px solid black;
+        margin: 20px;
+        padding: 20px;
       }
-
-      a {
+      :host([fancy]) {
+        display: block;
+        background-color: seashell;
+        border: 4px solid white;
+        box-shadow: 10px 5px 5px lightblue;
+}
+a {
   text-decoration: none;
 }
 #cardlist {
@@ -39,7 +46,6 @@ export class MyCard extends LitElement {
   padding: 10px;
   margin: 5px;
 }
-
 
 .btn {
   background-color: navy;
@@ -56,7 +62,7 @@ export class MyCard extends LitElement {
 }
 .card {
   width: 100%;
-  max-width: 400px;
+  max-width: 830px;
   border: 5px solid navy;
   padding: 8px;
 }
@@ -67,46 +73,72 @@ export class MyCard extends LitElement {
 .change-color {
   background-color: orange;
 }
-
-
-@media only screen and (max-width: 800px) and (min-width: 501px) {
-  .details-button {
-    display: block;
-  }
-}
-.details-button {
-  display: none;
+.label {
+  font-weight: bold;
 }
 
-@media only screen and (max-width: 500px) {
-  .card {
-    max-width: 100%;
+
+img {
+  height: 300px;
+  width: 400px;
+}
+
+details summary {
+    text-align: left;
+    font-size: 20px;
+    padding: 8px 0;
   }
 
-  img {
-    height: 200px;
-    width: 200px;
+  details[open] summary {
+    font-weight: bold;
+  }
   
-    
+  details div {
+    border: 2px solid black;
+    text-align: left;
+    padding: 8px;
+    height: 70px;
+    overflow: auto;
   }
-}
     `;
+  }
+
+  openChanged(e) {
+    console.log(e.newState);
+    if (e.newState === "open") {
+      this.fancy = true;
+    }
+    else {
+      this.fancy = false;
+    }
   }
 
   render() {
     return html`
-    <div> 
-    <img src="https://assets-cms.thescore.com/uploads/image/file/611967/w640xh480_GettyImages-1938930936.jpg?ts=1705467656">
+    <div class="card">
+    <div>
+      <img
+      class="img"
+      src="${this.image}"/>
+      <h1 class="label">${this.label}</h1>
+        <details ?open="${this.fancy}" @toggle="${this.openChanged}">
+          <summary>Description</summary>
+          This is my amazing description, thank you for reading!
+          <div>
+            <slot>${this.description}</slot>
+         </div>
+        </details>
     </div>`;
   }
 
   static get properties() {
     return {
-      title: { type: String },
-      image: { type: String },
-       //use reflect to duplicate the same image
+      label: { type: String, reflect: true },
+      image: { type: String, reflect: true },
       bodyText: { type: String },
+      description: { type: String, reflect: true},
       link: { type: String },
+      fancy: { type: Boolean, reflect: true },
     };
   }
 }

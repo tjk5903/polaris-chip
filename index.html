@@ -13,8 +13,8 @@
     body {
       margin: 0;
       padding: 0;
-      font-family: sans-serif;
-      background-color: #ededed;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #a6ddfa;
     }
     polaris-chip {
       margin: 16px;
@@ -27,28 +27,115 @@
   <h1>polaris-chip</h1>
   <!-- this is going to do whatever the tag's defaults are -->
   <!-- this is going to take the tag and change the title -->
+    <polaris-chip title="Schedules" link="https://gopsusports.com/calendar"></polaris-chip>
+    <polaris-chip title="News" link="https://gopsusports.com/sports/general/archives?search=&sport=general&season=0"></polaris-chip>
+    <polaris-chip title="Events" link="https://bjc.psu.edu/upcoming-events"></polaris-chip>
+    <polaris-chip title="Merchandise" link="https://www.pennstateclothes.com/"></polaris-chip>
+    <polaris-chip title="Tickets" link="https://gopsusports.com/sports/2018/10/4/tickets-home"></polaris-chip>
+
+    <h2>Controls</h2>
+    <div class="control-wrapper">
+      <button class="duplicate">Clone Card</button>
+      <button class="changetitle">Change Title</button>
+      <button class="changeimage">Change Image</button>
+      <button class="changebg">Change background</button>
+      <button class="delete">Delete Card</button>
+    </div>
   
-  <div class="control-wrapper">
-    <button class="duplicate">Clone Card</button>
-    <button id="changetitle">Change Title</button>
-    <button id="changeimage">Change Image</button>
-    <button id="changebg">Change Background</button>
-    <button id="delete">Delete Card</button>
-  </div>
-  <my-card></my-card>
-    <h2 class="card-title">Penn State beats Wisconsin!</h2>
-      <p>Penn State Men's Basketball Team upsets #11 Wisconsin.</p>
+
     
      <class="btn-wrapper">
   <a href ="https://hax.psu.edu">
     <button class="btn">Details</button>
    </a>
   </div>
+
+  <div class="card-list">
+
+  <h1>my-card</h1>
+  <my-card fancy description="Cool stuff here">
+    <p>Cool stuff here <strong>Things</strong></p>
+    </my-card>
+  <my-card
+    label="Mens Soccer"
+    image="https://dgiqkglfef83i.cloudfront.net/images/2023/9/14/Femi.png?width=1023&quality=80&format=jpg">
+    Penn State Mens Soccer
+  </my-card>
+  <my-card
+    label="Womens Lacrosse"
+    image="https://dgiqkglfef83i.cloudfront.net/images/2023/2/24/webasu.jpg?width=647&quality=80&format=jpg">
+    Penn State Womens Lacrosse
+  </my-card>
+  <my-card
+    label="Mens Lacrosse"
+    image="https://dgiqkglfef83i.cloudfront.net/images/2021/12/16/DSC_4053.jpg?width=1023&quality=80&format=jpg">
+    Penn State Mens Lacrosse
+  </my-card>
+    <my-card
+    label="Field Hockey"
+    image="https://dgiqkglfef83i.cloudfront.net/images/2022/9/7/8.26.field.hockey.85.JPG?width=1023&quality=80&format=jpg">
+    Penn State Field Hockey
+    </my-card>
+  </my-card>
+</div>
   
 
   <!-- this is what is bringing in the definition for this tag -->
   <script type="module" src="./src/polaris-chip.js"></script>
   <script type="module" src="./src/my-card.js"></script>
 </body>
+
+<script>
+  //Clone first card
+  document
+    .querySelector(".duplicate")
+    .addEventListener("click", function (event) {
+      
+      if (document.querySelector(".card-list").children.length < 10) {
+        const newCard = document.querySelector("my-card").cloneNode(true);
+        document.querySelector(".card-list").appendChild(newCard);
+      }
+    });
+
+  document
+    .querySelector(".changetitle")
+    .addEventListener("click", function (e) {
+      const cards = document.querySelectorAll("my-card");
+      cards.forEach(function (card) {
+        card.label = "A different title";
+      });
+    });
+
+  document
+    .querySelector(".changeimage")
+    .addEventListener("click", function (e) {
+      const cards = document.querySelectorAll("my-card");
+      cards.forEach(function (card) {
+        card.image =
+          "https://static.boredpanda.com/blog/wp-content/uploads/2020/05/This-dog-is-captivating-people-with-its-long-snout-and-it-can-become-a-world-record-holder-5ecf699b59df9__700.jpg";
+      });
+    });
+
+  document
+    .querySelector(".changebg")
+    .addEventListener("click", function (e) {
+      const cards = document.querySelectorAll("my-card");
+      cards.forEach((card) => {
+        card.shadowRoot
+          .querySelector(".card")
+          .classList.toggle("change-color");
+      });
+    });
+
+
+  document.querySelector(".delete").addEventListener("click", function (e) {
+    const cards = document.querySelectorAll("my-card");
+
+    if (cards.length !== 1) {
+      
+        cards[cards.length - 1].remove();
+      }
+  });
+</script>
 
 </html>
