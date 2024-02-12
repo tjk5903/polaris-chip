@@ -84,7 +84,10 @@ export class MyCard extends LitElement {
   }
 
   img {
-    max-height: 200px;
+    height: 200px;
+    width: 200px;
+  
+    
   }
 }
     `;
