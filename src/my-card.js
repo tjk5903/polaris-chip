@@ -117,9 +117,10 @@ details summary {
     return html`
     <div class="card"></div>
     <div>
-      <img
+      <!-- <img
       class="img"
-      src="${this.image}"/>
+      src="${this.image}"/> -->
+      <meme-maker> alt="Cat stalking a small toy" image-url="https://cdn2.thecatapi.com/images/9j5.jpg" top-text="I bring you" bottom-text="the death" </meme-maker>
       <h1 class="label">${this.label}</h1>
         <details ?open="${this.fancy}" @toggle="${this.openChanged}">
           <summary>Description</summary>
