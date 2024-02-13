@@ -14,7 +14,7 @@ export class MyCard extends LitElement {
   constructor() {
     super();
     this.label = "Penn State Sports";
-    this.image = "https://assets-cms.thescore.com/uploads/image/file/611967/w640xh480_GettyImages-1938930936.jpg?ts=1705467656";
+    this.image = "https://upload.wikimedia.org/wikipedia/en/thumb/3/3a/Penn_State_Nittany_Lions_logo.svg/640px-Penn_State_Nittany_Lions_logo.svg.png";
     this.bodyText = "Penn State beats Wisconsin!";
     this.description = '';
     this.fancy = false;
