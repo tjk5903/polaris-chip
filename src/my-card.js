@@ -115,7 +115,7 @@ details summary {
 
   render() {
     return html`
-    <div class="card">
+    <div class="card"></div>
     <div>
       <img
       class="img"
