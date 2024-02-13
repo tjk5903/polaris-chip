@@ -1,5 +1,4 @@
 import { LitElement, html, css } from 'lit';
-
 /**
  * Now it's your turn. Here's what we need to try and do
  * 1. 
@@ -32,7 +31,7 @@ export class MyCard extends LitElement {
         display: block;
         background-color: seashell;
         border: 4px solid white;
-        box-shadow: 10px 5px 5px lightblue;
+        box-shadow: black
 }
 a {
   text-decoration: none;
