@@ -37,7 +37,7 @@ export class MyCard extends LitElement {
 a {
   text-decoration: none;
 }
-#cardlist {
+#cardlist { 
   display: flex;
 }
 

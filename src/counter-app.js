@@ -19,8 +19,8 @@ export class CounterApp extends LitElement {
     return css`
       :host([counter="16"]) {
         display: flex;
-        border: 5px solid navy;
-        background-color: crimson;
+        border: 5px solid seashell;
+        background-color: slateblue;
         margin: 50px;
         padding: 25px;
         max-width: 100px;
