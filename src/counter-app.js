@@ -64,9 +64,9 @@ a {
   }  
   render() {
     return html`
-    <div class="control-wrapper">
-      <button class="add">+</button>
+    <div class="control-wrapper"> 
       <button class="subtract">-</button>
+      <button class="add">+</button>
     </div>
     `;
   }
@@ -74,7 +74,7 @@ a {
   static get properties() {
     return {
       title: { type: String, reflect: true },
-      counter: { type: Number },
+      counter: { type: Number, reflect: true },
     };
   }
 }
