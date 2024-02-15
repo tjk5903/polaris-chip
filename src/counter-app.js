@@ -17,56 +17,31 @@ export class CounterApp extends LitElement {
   }
   static get styles() {
     return css`
-      :host {
-        display: block;
-        border: 1px solid black;
-        margin: 20px;
-        padding: 20px;
-}
-a {
-  text-decoration: none;
-}
-#counterApp {
-  display: linear;
-}
-
-.btn-wrapper {
-  background-color: white;
-  padding: 10px;
-  margin: 5px;
-}
-
-.btn {
-  background-color: navy;
-  color: white;
-  font-size: 16px;
-  border-radius: 10%;
-  padding: 4px 4px 4px 4px;
-  margin: 4px 4px 4px 4px
-}
-
-.btn:focus,
-.btn:hover {
-  background-color: black;
-}
-.card {
-  width: 100%;
-  max-width: 500px;
-  border: 5px solid navy;
-  padding: 8px;
-}
-.card-content{
-  border: 2px solid navy;
-  padding: 2px;
+      :host([counter="16"]) {
+        display: flex;
+        border: 5px solid navy;
+        background-color: crimson;
+        margin: 50px;
+        padding: 25px;
+        max-width: 100px;
+        height: 150px;
 }
 
     `;
   }  
+  increase(){
+    this.counter += 1;
+  }
+  decrease(){
+    this.counter -= 1;
+  }
   render() {
     return html`
     <div class="control-wrapper"> 
+      <div>${this.counter}</div>
       <button class="subtract">-</button>
       <button class="add">+</button>
+      </div>
     </div>
     `;
   }
