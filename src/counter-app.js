@@ -51,7 +51,7 @@ a {
 }
 .card {
   width: 100%;
-  max-width: 830px;
+  max-width: 500px;
   border: 5px solid navy;
   padding: 8px;
 }
@@ -59,29 +59,25 @@ a {
   border: 2px solid navy;
   padding: 2px;
 }
-.change-color {
-  background-color: orange;
-}
+
     `;
   }  
   render() {
     return html`
-    <div class="counterApp"></div>
-    <counter-app counter="16" min="10" max="25"></counter-app>
-    </div>`;
+    <div class="control-wrapper">
+      <button class="add">+</button>
+      <button class="subtract">-</button>
+    </div>
+    `;
   }
 
   static get properties() {
     return {
-      label: { type: String, reflect: true },
-      image: { type: String, reflect: true },
-      bodyText: { type: String },
-      description: { type: String, reflect: true},
-      link: { type: String },
-      fancy: { type: Boolean, reflect: true },
+      title: { type: String, reflect: true },
+      counter: { type: Number },
     };
   }
 }
 
-globalThis.customElements.define(MyCard.tag, MyCard);
+globalThis.customElements.define(CounterApp.tag, CounterApp);
 
