@@ -19,30 +19,36 @@ export class CounterApp extends LitElement {
     return css`
       :host([counter="16"]) {
         display: flex;
+        flex-direction: column;
         border: 5px solid seashell;
         background-color: slateblue;
         margin: 50px;
         padding: 25px;
         max-width: 100px;
         height: 150px;
+        align-items: center;
 }
+button {
+        margin: 5px;
+        padding: 5px 10px;
+        font-size: 18px;
+      }
 
     `;
   }  
   increase(){
     this.counter += 1;
+    this.requestUpdate();
   }
   decrease(){
     this.counter -= 1;
+    this.requestUpdate();
   }
   render() {
     return html`
-    <div class="control-wrapper"> 
-      <div>${this.counter}</div>
-      <button class="subtract">-</button>
-      <button class="add">+</button>
-      </div>
-    </div>
+    <div>${this.counter}</div>
+    <button @click=${this.decrease}>-</button>
+    <button @click=${this.increase}>+</button>
     `;
   }
 
