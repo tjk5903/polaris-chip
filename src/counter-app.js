@@ -9,11 +9,11 @@ export class CounterApp extends LitElement {
   constructor() {
     super();
     this.title = "Counter App";
-    this.counter = "16";
+    this.counter = 0;
   }
   static get styles() {
     return css`
-      :host([counter="16"]) {
+      :host {
         display: flex;
         flex-direction: column;
         border: 5px solid seashell;
@@ -37,6 +37,13 @@ button {
 }
 
     `;
+  }
+  updated(changedProperties) {
+    if (changedProperties.has('counter')) {
+      if (this.counter === 21) {
+        this.makeItRain();
+      }
+    }
   }  
   increase() {
     if (this.counter < 21) {
@@ -64,6 +71,7 @@ button {
     <div class="counter">${this.counter}</div>
     <button @click=${this.decrease} ?disabled=${this.counter === 0}>-</button>
     <button @click=${this.increase} ?disabled=${this.counter === 21}>+</button>
+    <confetti-container id="confetti"></confetti-container>
     `;
   }
 
