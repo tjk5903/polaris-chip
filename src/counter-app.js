@@ -24,27 +24,50 @@ export class CounterApp extends LitElement {
         height: 150px;
         align-items: center;
 }
+.button-container {
+      display: flex;
+    }
 button {
         display: flex;
         margin: 5px;
         padding: 5px 10px;
         font-size: 18px;
       }
+button:hover {
+  background-color: slateblue; 
+}
+
+button:focus {
+  outline: none; 
+  box-shadow: 0 0 0 2px lightblue; 
+}
 .counter {
   font-size: 32px;
   padding: 10px;
   color: beige;
 }
+.red-text {
+  color: red;
+}
+.orange-text {
+  color: orange;
+}
+@keyframes rainbow-animation {
+  0% { color: red; }
+  16.666% { color: orange; }
+  33.333% { color: yellow; }
+  50% { color: green; }
+  66.666% { color: blue; }
+  83.333% { color: indigo; }
+  100% { color: violet; }
+}
+
+.rainbow-text {
+  animation: rainbow-animation 3s infinite;
+}
 
     `;
-  }
-  updated(changedProperties) {
-    if (changedProperties.has('counter')) {
-      if (this.counter === 21) {
-        this.makeItRain();
-      }
-    }
-  }  
+  } 
   increase() {
     if (this.counter < 21) {
       this.counter += 1;
@@ -58,19 +81,32 @@ button {
     }
   }
   makeItRain() {
+    // Dynamically import the confetti container module
     import("@lrnwebcomponents/multiple-choice/lib/confetti-container.js").then(
       (module) => {
+        // Set the popped attribute of the confetti container to trigger the confetti animation
         setTimeout(() => {
           this.shadowRoot.querySelector("#confetti").setAttribute("popped", "");
         }, 0);
       }
     );
   }
+
+  updated(changedProperties) {
+    if (changedProperties.has('counter')) {
+      // Check if the counter value is 21 and trigger the confetti animation
+      if (this.counter === 21) {
+        this.makeItRain();
+      }
+    }
+  }
   render() {
     return html`
-    <div class="counter">${this.counter}</div>
-    <button @click=${this.decrease} ?disabled=${this.counter === 0}>-</button>
-    <button @click=${this.increase} ?disabled=${this.counter === 21}>+</button>
+    <div class="counter ${this.counter === 0 ? 'red-text' : ''} ${this.counter === 18 ? 'orange-text' : ''} ${this.counter === 21 ? 'rainbow-text' : ''}">${this.counter}</div>
+    <div class="button-container">
+      <button @click=${this.decrease} ?disabled=${this.counter === 0}>-</button>
+      <button @click=${this.increase} ?disabled=${this.counter === 21}>+</button>
+    </div>
     <confetti-container id="confetti"></confetti-container>
     `;
   }
