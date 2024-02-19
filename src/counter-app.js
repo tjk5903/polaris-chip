@@ -11,8 +11,6 @@ export class CounterApp extends LitElement {
     super();
     this.title = "Counter App";
     this.counter = 0;
-    this.min = 10;
-    this.max = 25;
     
   }
   static get styles() {
