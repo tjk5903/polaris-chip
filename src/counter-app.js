@@ -13,7 +13,8 @@ export class CounterApp extends LitElement {
   constructor() {
     super();
     this.title = "Counter App";
-    this.counter = "16";
+    this.counter = 0;
+    this.values = [0, 1, 2, 3, 4,, 6, 7, 8, 9,10, 11, 12, 13, 14, 15, 16, 17, 18 , 19 ,20 ,21];
   }
   static get styles() {
     return css`
@@ -36,9 +37,12 @@ button {
 
     `;
   }  
-  increase(){
-    this.counter += 1;
-    this.requestUpdate();
+  increase() {
+    const index = this.counter;
+    if (values && index >= 0 && index < values.length) {
+      values[index]++;
+      this.requestUpdate();
+    }
   }
   decrease(){
     this.counter -= 1;
