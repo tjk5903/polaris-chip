@@ -27,7 +27,8 @@ export class CounterApp extends LitElement {
         max-width: 150px;
         height: 150px;
         align-items: center;
-}
+    }
+
 .button-container {
       display: flex;
     }
