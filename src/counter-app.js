@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import "@lrnwebcomponents/multiple-choice/lib/confetti-container.js";
 
 export class CounterApp extends LitElement {
 
@@ -81,10 +82,8 @@ button:focus {
     }
   }
   makeItRain() {
-    // Dynamically import the confetti container module
     import("@lrnwebcomponents/multiple-choice/lib/confetti-container.js").then(
       (module) => {
-        // Set the popped attribute of the confetti container to trigger the confetti animation
         setTimeout(() => {
           this.shadowRoot.querySelector("#confetti").setAttribute("popped", "");
         }, 0);
@@ -94,7 +93,6 @@ button:focus {
 
   updated(changedProperties) {
     if (changedProperties.has('counter')) {
-      // Check if the counter value is 21 and trigger the confetti animation
       if (this.counter === 21) {
         this.makeItRain();
       }
