@@ -130,6 +130,6 @@ button:focus {
     };
   }
 }
-
+customElements.define('counter-app', CounterApp);
 globalThis.customElements.define(CounterApp.tag, CounterApp);
 
