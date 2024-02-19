@@ -1,8 +1,4 @@
 import { LitElement, html, css } from 'lit';
-/**
- * Now it's your turn. Here's what we need to try and do
- * 1. 
- */
 
 export class CounterApp extends LitElement {
 
@@ -13,8 +9,7 @@ export class CounterApp extends LitElement {
   constructor() {
     super();
     this.title = "Counter App";
-    this.counter = 0;
-    this.values = [0, 1, 2, 3, 4,, 6, 7, 8, 9,10, 11, 12, 13, 14, 15, 16, 17, 18 , 19 ,20 ,21];
+    this.counter = "16";
   }
   static get styles() {
     return css`
@@ -25,25 +20,35 @@ export class CounterApp extends LitElement {
         background-color: slateblue;
         margin: 50px;
         padding: 25px;
-        max-width: 100px;
+        max-width: 150px;
         height: 150px;
         align-items: center;
 }
 button {
+        display: flex;
         margin: 5px;
         padding: 5px 10px;
         font-size: 18px;
       }
+.counter {
+  font-size: 32px;
+  padding: 10px;
+  color: beige;
+}
 
     `;
   }  
   increase() {
-    this.counter += 1;
-    this.requestUpdate();
+    if (this.counter < 21) {
+      this.counter += 1;
+      this.requestUpdate();
+    }
   }
   decrease(){
-    this.counter -= 1;
-    this.requestUpdate();
+    if (this.counter > 0) {
+      this.counter -= 1;
+      this.requestUpdate();
+    }
   }
   render() {
     return html`
