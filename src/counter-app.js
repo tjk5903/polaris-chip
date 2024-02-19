@@ -38,11 +38,8 @@ button {
     `;
   }  
   increase() {
-    const index = this.counter;
-    if (values && index >= 0 && index < values.length) {
-      values[index]++;
-      this.requestUpdate();
-    }
+    this.counter += 1;
+    this.requestUpdate();
   }
   decrease(){
     this.counter -= 1;
@@ -50,7 +47,7 @@ button {
   }
   render() {
     return html`
-    <div>${this.counter}</div>
+    <div class="counter">${this.counter}</div>
     <button @click=${this.decrease}>-</button>
     <button @click=${this.increase}>+</button>
     `;
