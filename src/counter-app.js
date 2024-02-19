@@ -50,11 +50,20 @@ button {
       this.requestUpdate();
     }
   }
+  makeItRain() {
+    import("@lrnwebcomponents/multiple-choice/lib/confetti-container.js").then(
+      (module) => {
+        setTimeout(() => {
+          this.shadowRoot.querySelector("#confetti").setAttribute("popped", "");
+        }, 0);
+      }
+    );
+  }
   render() {
     return html`
     <div class="counter">${this.counter}</div>
-    <button @click=${this.decrease}>-</button>
-    <button @click=${this.increase}>+</button>
+    <button @click=${this.decrease} ?disabled=${this.counter === 0}>-</button>
+    <button @click=${this.increase} ?disabled=${this.counter === 21}>+</button>
     `;
   }
 
