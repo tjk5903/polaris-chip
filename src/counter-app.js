@@ -66,6 +66,15 @@ button:focus {
 .rainbow-text {
   animation: rainbow-animation 3s infinite;
 }
+#confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      animation: 5s;
+    }
 
     `;
   } 
