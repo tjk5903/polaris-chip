@@ -11,6 +11,9 @@ export class CounterApp extends LitElement {
     super();
     this.title = "Counter App";
     this.counter = 0;
+    this.min = 10;
+    this.max = 25;
+    
   }
   static get styles() {
     return css`
@@ -122,6 +125,8 @@ button:focus {
     return {
       title: { type: String, reflect: true },
       counter: { type: Number, reflect: true },
+      min: { type: Number },
+      max: { type: Number }
     };
   }
 }
