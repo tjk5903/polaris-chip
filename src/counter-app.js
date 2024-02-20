@@ -11,7 +11,8 @@ export class CounterApp extends LitElement {
     super();
     this.title = "Counter App";
     this.counter = 0;
-    
+    this.min = 10;
+    this.max = 25;
   }
   static get styles() {
     return css`
@@ -115,6 +116,7 @@ button:focus {
     <div class="button-container">
       <button @click=${this.decrease} ?disabled=${this.counter === 0}>-</button>
       <button @click=${this.increase} ?disabled=${this.counter === 21}>+</button>
+
     </div>
     <confetti-container id="confetti"></confetti-container>
     `;
