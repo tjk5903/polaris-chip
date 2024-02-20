@@ -11,8 +11,8 @@ export class CounterApp extends LitElement {
     super();
     this.title = "Counter App";
     this.counter = 0;
-    this.min = 10;
-    this.max = 25;
+    this.min = "";
+    this.max = "";
   }
   static get styles() {
     return css`
@@ -82,13 +82,14 @@ button:focus {
     `;
   } 
   increase() {
-    if (this.counter < 21) {
+    if (this.counter < this.max) {
       this.counter += 1;
       this.requestUpdate();
     }
   }
-  decrease(){
-    if (this.counter > 0) {
+  
+  decrease() {
+    if (this.counter > this.min) {
       this.counter -= 1;
       this.requestUpdate();
     }
@@ -105,17 +106,21 @@ button:focus {
 
   updated(changedProperties) {
     if (changedProperties.has('counter')) {
+      if (this.counter > this.max) {
+        this.counter = this.max;
+      }
       if (this.counter === 21) {
         this.makeItRain();
       }
+      this.requestUpdate();
+      }
     }
-  }
   render() {
     return html`
     <div class="counter ${this.counter === 0 ? 'red-text' : ''} ${this.counter === 18 ? 'orange-text' : ''} ${this.counter === 21 ? 'rainbow-text' : ''}">${this.counter}</div>
     <div class="button-container">
       <button @click=${this.decrease} ?disabled=${this.counter === 0}>-</button>
-      <button @click=${this.increase} ?disabled=${this.counter === 21}>+</button>
+      <button @click=${this.increase} ?disabled=${this.counter === this.max}>+</button>
 
     </div>
     <confetti-container id="confetti"></confetti-container>
