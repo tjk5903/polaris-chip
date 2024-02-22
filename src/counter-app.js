@@ -56,6 +56,12 @@ button:focus {
 .orange-text {
   color: orange;
 }
+.blue-text {
+  color: blue;
+}
+.green-text {
+  color: green;
+}
 @keyframes rainbow-animation {
   0% { color: red; }
   16.666% { color: orange; }
@@ -117,7 +123,7 @@ button:focus {
     }
   render() {
     return html`
-    <div class="counter ${this.counter === 0 ? 'red-text' : ''} ${this.counter === 18 ? 'orange-text' : ''} ${this.counter === 21 ? 'rainbow-text' : ''}">${this.counter}</div>
+    <div class="counter ${this.counter === 0 ? 'red-text' : ''} ${this.counter === 18 ? 'orange-text' : ''} ${this.counter === 21 ? 'rainbow-text' : ''} ${this.counter === 10 ? 'blue-text' : ''} ${this.counter === 25 ? 'green-text' : ''}">${this.counter}</div>
     <div class="button-container">
       <button @click=${this.decrease} ?disabled=${this.counter === 0}>-</button>
       <button @click=${this.increase} ?disabled=${this.counter === this.max}>+</button>
