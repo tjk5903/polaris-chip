@@ -8,9 +8,22 @@ export class CampusAlert extends LitElement {
     constructor() {
         super();
         this.title = "Campus Alert";
-        this.counter = 0;
-        this.min = "";
-        this.max = "";
+        this.message = '';
+        this.dateTime = this.getCurrentDateTimeFormatted();
+        
+      }
+      getCurrentDateTimeFormatted() {
+        const options = { 
+          month: 'long', 
+          day: 'numeric', 
+          year: 'numeric', 
+          hour: 'numeric', 
+          minute: 'numeric', 
+          hour12: true,
+          timeZoneName: 'short'
+        };
+        const formattedDateTime = new Date().toLocaleString('en-US', options).replace('at', '');
+        return formattedDateTime.toUpperCase();
       }
       static get styles() {
         return css`
@@ -18,17 +31,42 @@ export class CampusAlert extends LitElement {
             display: flex;
             flex-direction: column;
             border: 5px solid seashell;
-            background-color: slateblue;
+            background-color: #b8860b;
             margin: 50px;
             padding: 25px;
-            max-width: 150px;
-            height: 150px;
+            max-width: 1000px;
+            height: 100px;
             align-items: center;
         }
+        .date-time {
+        font-size: 1rem;
+        font-family: 'Arial', sans-serif; 
+        margin: 5px 0;
+
+        }
+        .campus-alert {
+  position: relative;
+}
+
+.close-button {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: seashell;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: #ccc; 
+}
     
     .button-container {
           display: flex;
         }
+        
     button {
             display: flex;
             margin: 5px;
@@ -115,22 +153,23 @@ export class CampusAlert extends LitElement {
         }
       render() {
         return html`
-        <div class="counter ${this.counter === 0 ? 'red-text' : ''} ${this.counter === 18 ? 'orange-text' : ''} ${this.counter === 21 ? 'rainbow-text' : ''}">${this.counter}</div>
-        <div class="button-container">
-          <button @click=${this.decrease} ?disabled=${this.counter === 0}>-</button>
-          <button @click=${this.increase} ?disabled=${this.counter === this.max}>+</button>
-    
+        <div class="campus-alert" >
+        <p>${this.message}</p>
+        <div class="campus-alert">
+        <button class="close-button" @click=${this.closeAlert}>×</button>
+        <p>${this.message}</p>
+        <p class="date-time">${this.dateTime}</p> 
         </div>
-        <confetti-container id="confetti"></confetti-container>
+    </div>
+        
         `;
       }
     
       static get properties() {
         return {
           title: { type: String, reflect: true },
-          counter: { type: Number, reflect: true },
-          min: { type: Number },
-          max: { type: Number }
+          message: { type: String, reflect: true },
+          dateTime: { type: String }
         };
       }
     }
