@@ -30,7 +30,7 @@ export class CampusAlert extends LitElement {
           :host {
             display: flex;
             flex-direction: column;
-            border: 5px solid seashell;
+            border: 2px solid seashell;
             background-color: #b8860b;
             margin: 50px;
             padding: 25px;
@@ -42,6 +42,9 @@ export class CampusAlert extends LitElement {
         font-size: 1rem;
         font-family: 'Arial', sans-serif; 
         margin: 5px 0;
+        color: white;
+        font-weight: bold;
+
 
         }
         .campus-alert {
@@ -160,6 +163,7 @@ export class CampusAlert extends LitElement {
         <p>${this.message}</p>
         <p class="date-time">${this.dateTime}</p> 
         </div>
+        <div class="slanted-card"></div>
     </div>
         
         `;
