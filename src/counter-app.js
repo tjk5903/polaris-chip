@@ -125,7 +125,7 @@ button:focus {
     return html`
     <div class="counter ${this.counter === 0 ? 'red-text' : ''} ${this.counter === 18 ? 'orange-text' : ''} ${this.counter === 21 ? 'rainbow-text' : ''} ${this.counter === 10 ? 'blue-text' : ''} ${this.counter === 25 ? 'green-text' : ''}">${this.counter}</div>
     <div class="button-container">
-      <button @click=${this.decrease} ?disabled=${this.counter === 0}>-</button>
+      <button @click=${this.decrease} ?disabled=${this.counter === this.min}>-</button>
       <button @click=${this.increase} ?disabled=${this.counter === this.max}>+</button>
 
     </div>
