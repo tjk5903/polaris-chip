@@ -48,39 +48,48 @@ export class CampusAlert extends LitElement {
         font-weight: bold;
       }
       .campus-alert {
-        position: relative;
-      }
-      .close-button {
-        position: absolute;
-        top: 0px;
-        right: 0px;
-        background: none;
-        border: none;
-        font-size: 1.2rem;
-        color: white;
-        cursor: pointer;
-      }
-      .close-button:hover {
-        color: #ccc;
-      }
-      .button-container {
-        display: flex;
-      }
-      button {
-        display: flex;
-        margin: 5px;
-        padding: 5px 10px;
-        font-size: 18px;
-      }
-      .slanted-card {
-        position: absolute;
-        bottom: 10;
-        left: 20;
-        width: 100px;
-        height: 150px;
-        background-color: #FFFF00;
-        transform: skewX(10deg);
-      }
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid seashell;
+  background-color: #b8860b;
+  padding: 15px;
+  max-width: 300px;
+  height: auto;
+  align-items: center;
+  margin: 20px auto;
+}
+
+.alert-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.close-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: white;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: #ccc;
+}
+
+.slanted-card {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px; /* Adjust height as needed */
+  background-color: #FFFF00;
+  transform: skewX(10deg);
+}
       button:hover {
         background-color: slateblue;
       }
@@ -161,12 +170,12 @@ export class CampusAlert extends LitElement {
 
   render() {
     return html`
-      <div class="campus-alert">
-        <p>${this.message}</p>
-        <p class="date-time">${this.dateTime}</p>
-        <button class="close-button" @click=${this.closeAlert}>×</button>
-      </div>
       <div class="slanted-card"></div>
+      <div class="campus-alert">
+        <p class="alert-title">Campus Alert</p>
+        <p>${this.message}</p>
+      </div>
+      <button class="close-button" @click=${this.closeAlert}>×</button>
     `;
   }
 
