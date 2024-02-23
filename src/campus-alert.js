@@ -39,11 +39,14 @@ export class CampusAlert extends LitElement {
             align-items: center;
         }
         .date-time {
-        font-size: 1rem;
-        font-family: 'Arial', sans-serif; 
-        margin: 5px 0;
-        color: white;
-        font-weight: bold;
+  font-size: 1rem;
+  font-family: 'Arial', sans-serif; 
+  margin: 5px 0;
+  color: white;
+  font-weight: bold;
+  position: absolute; /* Position the date and time absolutely */
+  top: 10px; /* Adjust top position as needed */
+  left: 10px;
 
 
         }
@@ -164,7 +167,6 @@ export class CampusAlert extends LitElement {
         return html`
         <div class="campus-alert" >
         <p>${this.message}</p>
-        <div class="campus-alert">
         <button class="close-button" @click=${this.closeAlert}>×</button>
         <p>${this.message}</p>
         <p class="date-time">${this.dateTime}</p> 
