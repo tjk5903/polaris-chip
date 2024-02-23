@@ -34,22 +34,18 @@ export class CampusAlert extends LitElement {
             margin: 50px;
             padding: 25px;
             max-width: 1000px;
-            height: 100px;
+            height: 175px;
             align-items: center;
         }
         .date-time {
+          display: inline; 
           font-size: 1rem;
           font-family: 'Arial', sans-serif; 
           margin: 5px 0;
           color: white;
           font-weight: bold;
-          position: absolute; 
-          top: 0px; 
-          right: 300px;
-
-
-        }
-        .campus-alert {
+}
+  .campus-alert {
   position: relative;
 }
 
@@ -60,7 +56,7 @@ export class CampusAlert extends LitElement {
   background: none;
   border: none;
   font-size: 1.2rem;
-  color: black;
+  color: white;
   cursor: pointer;
 }
 
@@ -78,10 +74,12 @@ export class CampusAlert extends LitElement {
             padding: 5px 10px;
             font-size: 18px;
           }
-          .slanted-card {
-        position: relative;
-        width: 200px; 
-        height: 100px; 
+    .slanted-card {
+        position: absolute;
+        bottom: 10;
+        left: 20;
+        width: 100px; 
+        height: 150px; 
         background-color: #FFFF00; 
         transform: skewX(10deg); 
     button:hover {
