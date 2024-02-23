@@ -76,6 +76,12 @@ export class CampusAlert extends LitElement {
             padding: 5px 10px;
             font-size: 18px;
           }
+          .slanted-card {
+        position: relative;
+        width: 200px; 
+        height: 100px; 
+        background-color: white; 
+        transform: skewX(10deg); 
     button:hover {
       background-color: slateblue; 
     }
@@ -177,6 +183,7 @@ export class CampusAlert extends LitElement {
         };
       }
     }
+
     customElements.define('campus-alert', CampusAlert);
     globalThis.customElements.define(CampusAlert.tag, CampusAlert);
     
