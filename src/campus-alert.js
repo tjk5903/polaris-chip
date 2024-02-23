@@ -19,8 +19,7 @@ export class CampusAlert extends LitElement {
           year: 'numeric', 
           hour: 'numeric', 
           minute: 'numeric', 
-          hour12: true,
-          timeZoneName: 'short'
+          hour12: true
         };
         const formattedDateTime = new Date().toLocaleString('en-US', options).replace('at', '');
         return formattedDateTime.toUpperCase();
@@ -39,14 +38,14 @@ export class CampusAlert extends LitElement {
             align-items: center;
         }
         .date-time {
-  font-size: 1rem;
-  font-family: 'Arial', sans-serif; 
-  margin: 5px 0;
-  color: white;
-  font-weight: bold;
-  position: absolute; /* Position the date and time absolutely */
-  top: 10px; /* Adjust top position as needed */
-  left: 10px;
+          font-size: 1rem;
+          font-family: 'Arial', sans-serif; 
+          margin: 5px 0;
+          color: white;
+          font-weight: bold;
+          position: absolute; 
+          top: 0px; 
+          right: 300px;
 
 
         }
@@ -61,7 +60,7 @@ export class CampusAlert extends LitElement {
   background: none;
   border: none;
   font-size: 1.2rem;
-  color: seashell;
+  color: black;
   cursor: pointer;
 }
 
@@ -83,7 +82,7 @@ export class CampusAlert extends LitElement {
         position: relative;
         width: 200px; 
         height: 100px; 
-        background-color: white; 
+        background-color: #FFFF00; 
         transform: skewX(10deg); 
     button:hover {
       background-color: slateblue; 
@@ -163,19 +162,16 @@ export class CampusAlert extends LitElement {
           this.requestUpdate();
           }
         }
-      render() {
-        return html`
-        <div class="campus-alert" >
-        <p>${this.message}</p>
-        <button class="close-button" @click=${this.closeAlert}>×</button>
-        <p>${this.message}</p>
-        <p class="date-time">${this.dateTime}</p> 
-        </div>
-        <div class="slanted-card"></div>
+        render() {
+  return html`
+    <div class="campus-alert">
+      <p>${this.message}</p>
+      <p class="date-time">${this.dateTime}</p>
+      <button class="close-button" @click=${this.closeAlert}>×</button>
     </div>
-        
-        `;
-      }
+    <div class="slanted-card"></div>
+  `;
+}
     
       static get properties() {
         return {
