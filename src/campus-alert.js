@@ -9,11 +9,16 @@ export class CampusAlert extends LitElement {
   constructor() {
     super();
     this.title = "Campus Alert";
-    this.alert = '';
+    this.alert = "Default Message";
+    this.level = '';
     this.date = '';
     this.sticky = false;
+    this.opened = true;
     this.closedHeight = '50px';
     this.openHeight = '200px';
+    if (localStorage.getItem('campus-alert-opened-state') == "false"){
+      this.opened = false;
+    }
   }
 
 
@@ -30,7 +35,7 @@ export class CampusAlert extends LitElement {
         height: 175px;
         align-items: center;
       }
-      .date-time {
+      .date {
         display: inline;
         font-size: 1rem;
         font-family: 'Arial', sans-serif;
@@ -58,10 +63,10 @@ export class CampusAlert extends LitElement {
         display: flex;
       }
       button {
-        display: flex;
-        margin: 5px;
-        padding: 5px 10px;
-        font-size: 18px;
+        font-weight: bold;
+        float: right;
+        padding: 10px;
+        margin: 4px;
       }
       .slanted-card {
         position: absolute;
@@ -88,9 +93,9 @@ export class CampusAlert extends LitElement {
 
   static get properties() {
     return {
-      title: { type: String, reflect: true },
+      open: { type: Boolean, reflect: true },
       message: { type: String, reflect: true },
-      dateTime: { type: String },
+      date: { type: String },
       sticky: { type: Boolean, reflect: true },
       closedHeight: { type: String },
       openHeight: { type: String },
