@@ -8,10 +8,17 @@ export class CampusAlert extends LitElement {
 
   constructor() {
     super();
-    this.open = true; 
-    this.status = ''; 
-    this.date = ''; 
-    this.sticky = false; 
+    this.title = "Campus Alert";
+    this.alert = "Default Message";
+    this.level = '';
+    this.date = '';
+    this.sticky = false;
+    this.opened = false; 
+    this.closedHeight = '50px'; 
+    this.openHeight = '200px'; 
+    if (localStorage.getItem('campus-alert-opened-state') == "true") {
+      this.opened = true;
+    }
   }
 
 
@@ -70,8 +77,16 @@ export class CampusAlert extends LitElement {
         background-color: #FFFF00;
         transform: skewX(10deg);
       }
-        .opened {
-        height: auto;
+        .campus-alert {
+        transition: height 0.3s ease; 
+      }
+
+      .closed {
+        height: var(--closed-height, 50px); 
+      }
+
+      .opened {
+        height: var(--open-height, 200px); 
       }
     `;
   }
