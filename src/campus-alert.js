@@ -78,12 +78,28 @@ export class CampusAlert extends LitElement {
   
       .slanted-card {
         position: absolute;
-        bottom: 10px;
-        left: 20px;
+        bottom: 0;
+        right: 0;
         width: 100px;
-        height: 150px;
+        height: 100px; 
         background-color: #FFFF00;
-        transform: skewX(10deg);
+        transform: skewX(-10deg);
+        color: black;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .message-container {
+        position: relative;
+        height: 0;
+        overflow: hidden;
+        transition: height 0.3s ease;
+      }
+
+      .opened .message-container {
+        height: auto;
       }
   
       .closed {
@@ -123,6 +139,11 @@ export class CampusAlert extends LitElement {
         </div>
         <div class="campus-alert ${this.opened ? 'opened' : 'closed'}">
           ${this.alert}
+          <div class="message-container">
+            <div class="slanted-card">
+              ${this.message}
+            </div>
+          </div>
         </div>
       </div>
     `;
