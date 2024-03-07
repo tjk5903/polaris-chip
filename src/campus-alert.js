@@ -78,6 +78,17 @@ export class CampusAlert extends LitElement {
 
   toggleAlert() {
     this.opened = !this.opened;
+    const container = this.shadowRoot.querySelector('.closedContainer');
+    if (this.opened) {
+      container.style.height = this.openHeight;
+    } else {
+      container.style.height = this.closedHeight;
+    }
+    if (!this.opened) {
+      localStorage.setItem('campus-alert-opened-state', 'false');
+    } else {
+      localStorage.removeItem('campus-alert-opened-state');
+    }
   }
 
   render() {
@@ -96,22 +107,6 @@ export class CampusAlert extends LitElement {
       </div>
     </div>
     `;
-  }
-  toggleAlert() {
-    this.opened = !this.opened; 
-  
-    const container = this.shadowRoot.querySelector('.closedContainer');
-    if (this.opened) {
-      container.style.height = this.openHeight;
-    } else {
-      container.style.height = this.closedHeight;
-    }
-  
-    if (!this.opened) {
-      localStorage.setItem('campus-alert-opened-state', 'false');
-    } else {
-      localStorage.removeItem('campus-alert-opened-state');
-    }
   }
 
   closeBanner() {
