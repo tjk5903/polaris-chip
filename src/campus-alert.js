@@ -35,6 +35,8 @@ export class CampusAlert extends LitElement {
         height: 175px;
         align-items: center;
       }
+  
+      /* Date styling */
       .date {
         display: inline;
         font-size: 1rem;
@@ -43,56 +45,73 @@ export class CampusAlert extends LitElement {
         color: white;
         font-weight: bold;
       }
+  
+      /* Campus alert container */
       .campus-alert {
         position: relative;
+        transition: height 0.3s ease; /* Add transition here */
       }
+  
+      /* Close button styling */
       .close-button {
         position: absolute;
-        top: 0px;
-        right: 0px;
+        top: 0;
+        right: 0;
         background: none;
         border: none;
         font-size: 1.2rem;
         color: white;
         cursor: pointer;
       }
+  
+      /* Close button hover effect */
       .close-button:hover {
         color: #ccc;
       }
+  
+      /* Button container styling */
       .button-container {
         display: flex;
       }
+  
+      /* Button styling */
       button {
         font-weight: bold;
         float: right;
         padding: 10px;
         margin: 4px;
       }
+  
+      /* Slanted card styling */
       .slanted-card {
         position: absolute;
-        bottom: 10;
-        left: 20;
+        bottom: 10px;
+        left: 20px;
         width: 100px;
         height: 150px;
         background-color: #FFFF00;
         transform: skewX(10deg);
       }
-        .campus-alert {
-        transition: height 0.3s ease; 
-      }
-
+  
+      /* Closed state */
       .closed {
-        height: var(--closed-height, 50px); 
+        height: var(--closed-height, 50px);
       }
-
+  
+      /* Opened state */
       .opened {
-        height: var(--open-height, 200px); 
+        height: var(--open-height, 200px);
       }
     `;
   }
 
   toggleAlert() {
     this.opened = !this.opened;
+    
+    const container = this.shadowRoot.querySelector('.closedContainer');
+    container.classList.toggle('opened', this.opened);
+    container.classList.toggle('closed', !this.opened);
+    
     if (!this.opened) {
       localStorage.setItem('campus-alert-opened-state', 'false');
     } else {
