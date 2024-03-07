@@ -9,7 +9,7 @@ export class CampusAlert extends LitElement {
   constructor() {
     super();
     this.title = "Campus Alert";
-    this.alert = "Default Message";
+    this.alert = "TEST CAMPUS ALERT";
     this.level = '';
     this.date = '';
     this.sticky = false;
@@ -93,12 +93,6 @@ export class CampusAlert extends LitElement {
 
   toggleAlert() {
     this.opened = !this.opened;
-    const container = this.shadowRoot.querySelector('.closedContainer');
-    if (this.opened) {
-      container.style.height = this.openHeight;
-    } else {
-      container.style.height = this.closedHeight;
-    }
     if (!this.opened) {
       localStorage.setItem('campus-alert-opened-state', 'false');
     } else {
