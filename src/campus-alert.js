@@ -111,7 +111,7 @@ export class CampusAlert extends LitElement {
           `}
           Alert!
         </div>
-        <div class="campus-alert" style="height: ${(this.opened) ? this.openHeight : this.closedHeight};">
+        <div class="campus-alert ${this.opened ? 'opened' : 'closed'}">
           ${this.alert}
         </div>
       </div>
@@ -120,7 +120,7 @@ export class CampusAlert extends LitElement {
 
 static get properties() {
   return {
-    level: { type: String },
+      level: { type: String },
       open: { type: Boolean, reflect: true },
       message: { type: String },
       date: { type: String },
