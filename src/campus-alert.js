@@ -8,17 +8,10 @@ export class CampusAlert extends LitElement {
 
   constructor() {
     super();
-    this.title = "Campus Alert";
-    this.alert = "Default Message";
-    this.level = '';
-    this.date = '';
-    this.sticky = false;
-    this.opened = true;
-    this.closedHeight = '50px';
-    this.openHeight = '200px';
-    if (localStorage.getItem('campus-alert-opened-state') == "false"){
-      this.opened = false;
-    }
+    this.open = true; 
+    this.status = ''; 
+    this.date = ''; 
+    this.sticky = false; 
   }
 
 
@@ -77,30 +70,86 @@ export class CampusAlert extends LitElement {
         background-color: #FFFF00;
         transform: skewX(10deg);
       }
+        .opened {
+        height: auto;
+      }
     `;
+  }
+
+  toggleAlert() {
+    this.opened = !this.opened;
   }
 
   render() {
     return html`
-      <div class="campus-alert">
-        <p>${this.message}</p>
-        <p class="date-time">${this.dateTime}</p>
-        <button class="close-button" @click=${this.closeAlert}>×</button>
+    <div class="closedContainer ${(this.sticky) ? "sticky" : ""}">
+      <div class ="closed-toggle-button" @click="${this.toggleAlert}">
+        ${this.opened ? html`
+          <svg xmlns="http://www.w3.org/2000/svg" style="height: 50px; width: 50px;" viewBox="0 0 24 24"><title>chevron-down</title><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>
+        ` : html`
+          <svg xmlns="http://www.w3.org/2000/svg" style="height: 50px; width: 50px;" viewBox="0 0 24 24"><title>alert-circle-outline</title><path d="M11,15H13V17H11V15M11,7H13V13H11V7M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20Z" /></svg>
+        `}
+        Alert!
       </div>
-      <div class="slanted-card"></div>
+      <div class="campus-alert ${this.opened ? 'open' : ''}">
+        ${this.alert}
+      </div>
+    </div>
     `;
   }
-
-  static get properties() {
-    return {
-      open: { type: Boolean, reflect: true },
-      message: { type: String, reflect: true },
-      date: { type: String },
-      sticky: { type: Boolean, reflect: true },
-      closedHeight: { type: String },
-      openHeight: { type: String },
-    };
+  toggleAlert() {
+    this.opened = !this.opened; 
+  
+    const container = this.shadowRoot.querySelector('.closedContainer');
+    if (this.opened) {
+      container.style.height = this.openHeight;
+    } else {
+      container.style.height = this.closedHeight;
+    }
+  
+    if (!this.opened) {
+      localStorage.setItem('campus-alert-opened-state', 'false');
+    } else {
+      localStorage.removeItem('campus-alert-opened-state');
+    }
   }
+
+  closeBanner() {
+    this.opened = false;
+    console.log("closed");
+    this.style.setProperty('--display-mode', 'none');
+    this.style.setProperty('--min-banner-height', '6vh');
+    this.style.setProperty('--display-mode-opposite', 'flex');
+
+    console.log("local storage set to false");
+    localStorage.setItem("alertOpen", "false");
+
+    // get openClassText element.focus()
+    this.shadowRoot.querySelector('#openClassText').focus();
+}
+
+openBanner() {
+    this.opened = true;
+    console.log("opened");
+    this.style.setProperty('--display-mode', 'unset');
+    this.style.setProperty('--min-banner-height', '20vh');
+    this.style.setProperty('--display-mode-opposite', 'none');
+
+    console.log("local storage set to true");
+    localStorage.setItem("alertOpen", "true");
+
+    // get closeClassText element.focus()
+    this.shadowRoot.querySelector('#closeBannerButton').focus();
+}
+
+static get properties() {
+  return {
+    open: { type: Boolean }, 
+    status: { type: String },
+    date: { type: String }, 
+    sticky: { type: Boolean } 
+  };
+}
 }
 
 customElements.define('campus-alert', CampusAlert);
