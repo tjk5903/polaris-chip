@@ -28,15 +28,14 @@ export class CampusAlert extends LitElement {
         display: flex;
         flex-direction: column;
         border: 2px solid seashell;
-        background-color: #b8860b;
+        background-color: #e6e20b;
         margin: 50px;
         padding: 25px;
         max-width: 1000px;
-        height: 175px;
+        height: 50px;
         align-items: center;
       }
   
-      /* Date styling */
       .date {
         display: inline;
         font-size: 1rem;
@@ -46,13 +45,11 @@ export class CampusAlert extends LitElement {
         font-weight: bold;
       }
   
-      /* Campus alert container */
       .campus-alert {
         position: relative;
-        transition: height 0.3s ease; /* Add transition here */
+        transition: height 0.3s ease; 
       }
   
-      /* Close button styling */
       .close-button {
         position: absolute;
         top: 0;
@@ -64,17 +61,14 @@ export class CampusAlert extends LitElement {
         cursor: pointer;
       }
   
-      /* Close button hover effect */
       .close-button:hover {
         color: #ccc;
       }
   
-      /* Button container styling */
       .button-container {
         display: flex;
       }
   
-      /* Button styling */
       button {
         font-weight: bold;
         float: right;
@@ -82,7 +76,6 @@ export class CampusAlert extends LitElement {
         margin: 4px;
       }
   
-      /* Slanted card styling */
       .slanted-card {
         position: absolute;
         bottom: 10px;
@@ -93,12 +86,10 @@ export class CampusAlert extends LitElement {
         transform: skewX(10deg);
       }
   
-      /* Closed state */
       .closed {
         height: var(--closed-height, 50px);
       }
   
-      /* Opened state */
       .opened {
         height: var(--open-height, 200px);
       }
