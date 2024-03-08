@@ -13,12 +13,9 @@ export class CampusAlert extends LitElement {
     this.level = '';
     this.date = '';
     this.sticky = false;
-    this.opened = false; 
+    this.opened = localStorage.getItem('campus-alert-opened-state') === "true";
     this.closedHeight = '50px'; 
     this.openHeight = '200px'; 
-    if (localStorage.getItem('campus-alert-opened-state') == "true") {
-      this.opened = true;
-    }
   }
 
 
@@ -32,7 +29,6 @@ export class CampusAlert extends LitElement {
         margin: 50px;
         padding: 25px;
         max-width: 1000px;
-        height: 50px;
         align-items: center;
       }
 
@@ -52,6 +48,7 @@ export class CampusAlert extends LitElement {
       .campus-alert {
         position: relative;
         transition: height 0.3s ease; 
+        overflow: hidden; 
       }
   
       .close-button {
@@ -118,19 +115,11 @@ export class CampusAlert extends LitElement {
 
   toggleAlert() {
     this.opened = !this.opened;
+    localStorage.setItem("campus-alert-opened-state", this.opened);
 
-    const container = this.shadowRoot.querySelector('.campus-alert');
-    container.classList.toggle('opened', this.opened);
-    container.classList.toggle('closed', !this.opened);
+  }
 
-    if (!this.opened) {
-      localStorage.setItem('campus-alert-opened-state', 'false');
-    } else {
-      localStorage.removeItem('campus-alert-opened-state');
-    }
-}
-
-render() {
+  render() {
     return html`
       <div class="closedContainer ${(this.sticky) ? "sticky" : ""}">
         <div class ="closed-toggle-button" @click="${this.toggleAlert}">
@@ -139,7 +128,6 @@ render() {
           ` : html`
             <svg xmlns="http://www.w3.org/2000/svg" style="height: 50px; width: 50px; visibility: hidden;" viewBox="0 0 24 24"><title>alert-circle-outline</title><path d="M11,15H13V17H11V15M11,7H13V13H11V7M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20Z" /></svg>
           `}
-          Alert!
         </div>
         <div class="campus-alert ${this.opened ? 'opened' : 'closed'}">
           ${this.alert}
@@ -151,10 +139,10 @@ render() {
         </div>
       </div>
     `;
-}
+  }
 
-static get properties() {
-  return {
+  static get properties() {
+    return {
       level: { type: String },
       open: { type: Boolean, reflect: true },
       message: { type: String },
