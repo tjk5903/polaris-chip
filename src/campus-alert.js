@@ -48,17 +48,19 @@ export class CampusAlert extends LitElement {
   
       .date {
   position: absolute;
-  top: 10px; /* Adjust the distance from the top */
-  left: -50px; /* Adjust the distance from the left */
+  top: 0px; /* Adjust the distance from the top */
+  left: 5px; /* Adjust the distance from the left */
   font-size: 1rem; /* Adjust font size as needed */
   font-family: 'Arial', sans-serif;
   font-weight: bold;
   color: white;
 }
-      .closedContainer {
-        position: relative; /* Make the container relative */
-        overflow-x: visible; /* Ensure horizontal overflow is visible */
-      }
+.closedContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch; /* Ensure the children stretch to fill the width */
+  width: 100%; /* Expand the container to fill the available width */
+}
   
       .campus-alert {
   position: relative;
@@ -70,7 +72,7 @@ export class CampusAlert extends LitElement {
 
 .close-button {
   position: absolute; /* Position the close button absolutely */
-  top: 10px;
+  top: -15px;
   right: 10px;
   background: none;
   border: none;
@@ -126,7 +128,7 @@ export class CampusAlert extends LitElement {
   
       .opened {
   height: var(--open-height, 200px);
-  width: 800%; /* Expand horizontally to fill the container */
+  width: 100%; /* Expand horizontally to fill the container */
 }
 
       .opened .close-button {
@@ -143,34 +145,36 @@ export class CampusAlert extends LitElement {
 
   render() {
     // Get the current date
-    const currentDate = new Date().toLocaleDateString();
-  
-    return html`
-    <div class="closedContainer ${(this.sticky) ? "sticky" : ""}">
-      <div class="closed-toggle-button" @click="${this.toggleAlert}">
-        <svg xmlns="http://www.w3.org/2000/svg" style="height: 50px; width: 50px;" viewBox="0 0 24 24">
-          <title>${this.opened ? 'chevron-down' : 'chevron-up'}</title>
-          <path d="${this.opened ? 'M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z' : 'M16.59,15.41L12,10.83L7.41,15.41L6,13.83L12,7.83L18,13.83L16.59,15.41Z'}" />
-        </svg>
-      </div>
-      <div class="campus-alert ${this.opened ? 'opened' : 'closed'}">
-        ${this.opened ? html`
-          <div class="date">${currentDate}</div> <!-- Display the current date -->
-          <button class="close-button" @click="${this.closeBanner}">Close</button>
-        ` : ''}
-        <div class="info-button">
-          <!-- Place your info button here -->
-        </div>
-        <div class="message-container">
-          <div class="slanted-card" style="display: ${this.opened ? 'flex' : 'none'}">
-            ${this.message}
-          </div>
-        </div>
-      </div>
-    </div>
-    `;
-  }
+    const currentDate = new Date();
+    const options = { month: 'long', day: '2-digit', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true };
+    const formattedDate = currentDate.toLocaleString('en-US', options).toUpperCase();
 
+    return html`
+        <div class="closedContainer ${(this.sticky) ? "sticky" : ""}">
+            <div class="closed-toggle-button" @click="${this.toggleAlert}">
+                ${!this.opened ? html`
+                    <svg xmlns="http://www.w3.org/2000/svg" style="height: 50px; width: 50px;" viewBox="0 0 24 24">
+                        <title>chevron-down</title>
+                        <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
+                    </svg>` : ''}
+            </div>
+            <div class="campus-alert ${this.opened ? 'opened' : 'closed'}">
+                ${this.opened ? html`
+                    <div class="date">${formattedDate}</div> <!-- Display the formatted date -->
+                    <button class="close-button" @click="${this.closeBanner}">Close</button>
+                ` : ''}
+                <div class="info-button">
+                    <!-- Place your info button here -->
+                </div>
+                <div class="message-container">
+                    <div class="slanted-card" style="display: ${this.opened ? 'flex' : 'none'}">
+                        ${this.message}
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
   static get properties() {
     return {
       level: { type: String },
