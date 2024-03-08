@@ -161,7 +161,7 @@ export class CampusAlert extends LitElement {
             <div class="campus-alert ${this.opened ? 'opened' : 'closed'}">
                 ${this.opened ? html`
                     <div class="date">${formattedDate}</div> <!-- Display the formatted date -->
-                    <button class="close-button" @click="${this.closeBanner}">Close</button>
+                    <button class="close-button" @click="${this.closeBanner}">&times; Close</button>
                 ` : ''}
                 <div class="info-button">
                     <!-- Place your info button here -->
