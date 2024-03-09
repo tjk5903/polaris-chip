@@ -10,7 +10,7 @@ export class CampusAlert extends LitElement {
     super();
     this.title = "Campus Alert";
     this.alert = "TEST CAMPUS ALERT";
-    this.level = 'notice'; // Default level
+    this.level = 'notice'; 
     this.date = '';
     this.sticky = false;
     this.opened = true;
@@ -55,7 +55,7 @@ export class CampusAlert extends LitElement {
         align-items: center;
         color: var(--alert-text-color, black);
         background-color: var(--alert-background-color, blue);
-        transition: background-color 0.3s ease; /* Add transition for background color */
+        transition: background-color 0.3s ease; 
       }
 
       .date {
@@ -83,12 +83,12 @@ export class CampusAlert extends LitElement {
         color: black;
         font-weight: bold;
         display: flex;
-        justify-content: center; /* Horizontally center the text */
-        align-items: center; /* Vertically center the text */
-        height: 100%; /* Ensure the div takes up the full height of its parent */
+        justify-content: center; 
+        align-items: center; 
+        height: 100%; 
       }
       .closed-toggle-button {
-        margin-left: 10px; /* Add some spacing between text and arrow */
+        margin-left: 10px; 
       }
 
       .campus-alert {
@@ -171,7 +171,6 @@ export class CampusAlert extends LitElement {
     const options = { month: 'long', day: '2-digit', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true };
     const formattedDate = currentDate.toLocaleString('en-US', options).toUpperCase();
     
-    // Define color variables based on importance attribute
     let textColor = 'black';
     let backgroundColor = 'blue';
     switch (this.importance) {
@@ -192,11 +191,9 @@ export class CampusAlert extends LitElement {
         break;
     }
 
-    // Apply color variables to CSS custom properties
     this.style.setProperty('--alert-text-color', textColor);
     this.style.setProperty('--alert-background-color', backgroundColor);
 
-    // Define CSS classes for info button based on alert state
     const infoButtonClass = this.opened ? 'info-button-opened' : 'info-button-closed';
 
     return html`
@@ -206,7 +203,6 @@ export class CampusAlert extends LitElement {
         <div class="date">${formattedDate}</div>
         <button class="close-button" @click="${this.closeBanner}">&times; Close</button>
         <div class="${infoButtonClass}">
-          <!-- Info button content -->
           <svg fill="#000000" height="30px" width="30px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 27.963 27.963" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g id="c129_exclamation"> <path d="M13.983,0C6.261,0,0.001,6.259,0.001,13.979c0,7.724,6.26,13.984,13.982,13.984s13.98-6.261,13.98-13.984 C27.963,6.259,21.705,0,13.983,0z M13.983,26.531c-6.933,0-12.55-5.62-12.55-12.553c0-6.93,5.617-12.548,12.55-12.548 c6.931,0,12.549,5.618,12.549,12.548C26.531,20.911,20.913,26.531,13.983,26.531z"></path> <polygon points="15.579,17.158 16.191,4.579 11.804,4.579 12.414,17.158 "></polygon> <path d="M13.998,18.546c-1.471,0-2.5,1.029-2.5,2.526c0,1.443,0.999,2.528,2.444,2.528h0.056c1.499,0,2.469-1.085,2.469-2.528 C16.441,19.575,15.468,18.546,13.998,18.546z"></path> </g> <g id="Capa_1_207_"> </g> </g> </g></svg>
         </div>
         <div class="message-container">
@@ -217,7 +213,6 @@ export class CampusAlert extends LitElement {
       ` : html`
           <div class="closed-text">
             <div class="${infoButtonClass}">
-              <!-- Info button content -->
               <svg fill="#000000" height="30px" width="30px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 27.963 27.963" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g id="c129_exclamation"> <path d="M13.983,0C6.261,0,0.001,6.259,0.001,13.979c0,7.724,6.26,13.984,13.982,13.984s13.98-6.261,13.98-13.984 C27.963,6.259,21.705,0,13.983,0z M13.983,26.531c-6.933,0-12.55-5.62-12.55-12.553c0-6.93,5.617-12.548,12.55-12.548 c6.931,0,12.549,5.618,12.549,12.548C26.531,20.911,20.913,26.531,13.983,26.531z"></path> <polygon points="15.579,17.158 16.191,4.579 11.804,4.579 12.414,17.158 "></polygon> <path d="M13.998,18.546c-1.471,0-2.5,1.029-2.5,2.526c0,1.443,0.999,2.528,2.444,2.528h0.056c1.499,0,2.469-1.085,2.469-2.528 C16.441,19.575,15.468,18.546,13.998,18.546z"></path> </g> <g id="Capa_1_207_"> </g> </g> </g></svg>
             </div>
             TEST CAMPUS ALERT
