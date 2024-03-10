@@ -244,7 +244,7 @@ export class CampusAlert extends LitElement {
       closedHeight: { type: String }, 
       openHeight: { type: String },
       stickyIndex: { type: Boolean, reflect: true }, 
-      importance: { type: String } // Define importance attribute
+      importance: { type: String }
 
     };
   }
