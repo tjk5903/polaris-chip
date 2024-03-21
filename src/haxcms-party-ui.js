@@ -43,7 +43,7 @@ class ExampleEvent extends LitElement {
   targetClicked(e) {
     // what item bubbled the event
     console.log(e.target);
-    // a way of seleecting the closest tag relative to what you clicked
+    // a way of selecting the closest tag relative to what you clicked
     console.log(e.target.closest('my-item'));
     console.log(e.target.closest('my-item').getAttribute('data-id'));
     // other ways of knowing what to eliminate but this is one method
@@ -65,7 +65,7 @@ class ExampleEvent extends LitElement {
   render() {
     return html`
      <div>
-      <button @click="${this.addItem}">Add item</button>
+      <button @click="${this.addItem}">Add user</button>
      </div>
      <div>
         ${this.items.map((item) => html`
