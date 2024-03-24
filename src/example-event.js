@@ -3,75 +3,97 @@ import { LitElement, html, css } from 'lit';
 class ExampleEvent extends LitElement {
   static properties = {
     items: { type: Array },
+    userInput: { type: String } // Add property for user input
   }
 
   static styles = css`
     :host {
-     display: block
+     display: block;
     }
 
     my-item  {
       display: block;
-      background-color: orange;
+      background-color: seashell;
       padding: 16px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    my-item .content {
+      margin-bottom: 10px;
+    }
+
+    my-item .delete-button {
+      background-color: #5776ff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 12px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    my-item .delete-button:hover {
+      background-color: #0004ff;
+    }
+
+    input[type="text"] {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
     }
   `;
 
   constructor() {
     super();
-    // MUST have array initialized as empty or it'll break in console
     this.items = [];
+    this.userInput = ''; // Initialize user input
   }
+  
 
-  addItem(e) {
+  addItem() {
     const randomNumber = globalThis.crypto.getRandomValues(new Uint32Array(1))[0];
 
     const item = {
       id: randomNumber,
       title: "Cool",
-      content: "Some content of some kind",
+      content: this.userInput, // Assign user input to content
       coolness: 7
     }
-    console.log(item);
-    // push by itself is not a mutating operation
-    this.items.push(item);
+    this.items = [...this.items, item];
+    this.userInput = ''; // Clear user input after adding user
     this.requestUpdate();
-    //this.items = [...this.items, item];
-    console.log(this.items);
+  }
+
+  deleteUser(id) {
+    this.items = this.items.filter(item => item.id !== id);
+    this.requestUpdate();
+  }
+
+  handleInputChange(event) {
+    this.userInput = event.target.value.slice(0, 20); // Limit input to 20 characters
   }
 
   targetClicked(e) {
-    // what item bubbled the event
-    console.log(e.target);
-    // a way of selecting the closest tag relative to what you clicked
-    console.log(e.target.closest('my-item'));
-    console.log(e.target.closest('my-item').getAttribute('data-id'));
-    // other ways of knowing what to eliminate but this is one method
-    this.shadowRoot.querySelectorAll('my-item').forEach((item) => {
-      if (item === e.target.closest('my-item')) {
-        console.log(item);
-        console.log('found the thing clicked in the array');
-      }
-    });
-
-    // another way of finding the index that matches what was clicked if you have a unique value in your items as added
-    // which... seed / name of the user should be enforced to be unique so.....
-    const index = this.items.findIndex((item) => {
-      return item.id === parseInt(e.target.closest('my-item').getAttribute('data-id'));
-    });
-    console.log(index);
+    const userId = parseInt(e.target.closest('my-item').getAttribute('data-id'));
+    this.deleteUser(userId);
   }
 
   render() {
     return html`
      <div>
-      <button @click="${this.addItem}">Add user</button>
+      <input type="text" placeholder="Enter text (max 20 characters)" .value="${this.userInput}" @input="${this.handleInputChange}">
+      <button @click="${this.addItem}" ?disabled="${this.userInput.length === 0 || this.userInput.length > 20}">Add user</button>
      </div>
      <div>
         ${this.items.map((item) => html`
-          <my-item title="${item.title}" @click="${this.targetClicked}" data-id="${item.id}">
-          ${item.content}
-          <strong>${item.coolness}</strong>
+          <my-item data-id="${item.id}">
+            <div class="content">
+              ${item.content}
+              <strong>${item.coolness}</strong>
+            </div>
+            <button class="delete-button" @click="${() => this.deleteUser(item.id)}">Delete</button>
           </my-item>
         `)}
       </div>
