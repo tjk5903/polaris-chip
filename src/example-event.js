@@ -13,6 +13,19 @@ class ExampleEvent extends DDD {
      display: block;
     }
 
+    .user-input-container {
+      background-color: turquoise;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .user-list-container {
+      background-color: turquoise;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
     my-item  {
       display: block;
       background-color: seashell;
@@ -20,7 +33,7 @@ class ExampleEvent extends DDD {
       margin-bottom: 10px;
       border-radius: 8px;
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-      width: 35%;
+      width: 55%;
     }
 
     my-item .content {
@@ -94,7 +107,8 @@ class ExampleEvent extends DDD {
 
   render() {
     return html`
-      <div>
+      <div class="user-list-container">
+        <div class="user-input-container">
         <input type="text" placeholder="Enter Username" .value="${this.userInput}" @input="${this.handleInputChange}">
         <button @click="${this.addItem}" ?disabled="${this.userInput.length === 0 || this.userInput.length > 10}">Add user</button>
       </div>
@@ -109,6 +123,7 @@ class ExampleEvent extends DDD {
             <button class="delete-button" @click="${() => this.deleteUser(item.id)}">Delete</button>
           </my-item>
         `)}
+      </div>
       </div>
       <!-- Use DDD component -->
       <DDD></DDD>
