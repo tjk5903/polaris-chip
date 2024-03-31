@@ -1,11 +1,11 @@
-import { html, css, LitElement } from 'lit';
+import { html, css } from 'lit';
 import { DDD } from "@lrnwebcomponents/d-d-d/d-d-d.js";
 import "@lrnwebcomponents/rpg-character/rpg-character.js";
 
-class ExampleEvent extends LitElement {
+class ExampleEvent extends DDD {
   static properties = {
     items: { type: Array },
-    userInput: { type: String } // Add property for user input
+    userInput: { type: String }
   }
 
   static styles = css`
@@ -101,7 +101,6 @@ class ExampleEvent extends LitElement {
       <div>
         ${this.items.map((item) => html`
           <my-item data-id="${item.id}">
-            <!-- Use rpg-character component to display character -->
             <rpg-character sprite="${item.sprite}" .animate="${true}"></rpg-character>
             <div class="content">
               <strong>${item.content}</strong>
