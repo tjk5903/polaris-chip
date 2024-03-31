@@ -116,4 +116,4 @@ class ExampleEvent extends DDD {
   }
 }
 
-customElements.define('example-event', ExampleEvent);
+globalThis.customElements.define('example-event', ExampleEvent);
