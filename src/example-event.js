@@ -142,14 +142,16 @@ class ExampleEvent extends DDD {
   }
 
   createParty() {
-    const confettiSettings = {
-      target: 'confetti-container',
-      max: 100,
-      size: 2,
-      animate: true,
-      props: ['circle', 'square', 'triangle', 'line'],
-      colors: [[165,104,246],[230,61,135],[0,199,228],[253,214,126]]
-    };
+    import('confetti-js').then(module => {
+      const ConfettiGenerator = module.default;
+      const confettiSettings = {
+        target: 'confetti-container',
+        max: 100,
+        size: 2,
+        animate: true,
+        props: ['circle', 'square', 'triangle', 'line'],
+        colors: [[165,104,246],[230,61,135],[0,199,228],[253,214,126]]
+      };
     const confetti = new ConfettiGenerator(confettiSettings);
     confetti.render();
 
@@ -157,7 +159,8 @@ class ExampleEvent extends DDD {
       setTimeout(() => {
         confetti.clear();
       }, 5000);
-    };
+    });
+  }
   render() {
     return html`
       <div class="user-list-container">
