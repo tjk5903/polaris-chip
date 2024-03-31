@@ -1,6 +1,5 @@
 import { html, css } from 'lit';
 import { DDD } from "@lrnwebcomponents/d-d-d/d-d-d.js";
-import ConfettiGenerator from 'confetti-js';
 import "@lrnwebcomponents/rpg-character/rpg-character.js";
 
 class ExampleEvent extends DDD {
@@ -183,6 +182,7 @@ class ExampleEvent extends DDD {
         ${this.renderCreatePartyButton()}
       </div>
       <div id="confetti-container"></div>
+      <DDD></DDD>
     `;
   }
 }
