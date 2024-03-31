@@ -10,20 +10,40 @@ class ExampleEvent extends DDD {
 
   static styles = css`
     :host {
-     display: block;
+      display: block;
+    }
+
+    .user-list-container {
+      background-color: lightblue;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
     }
 
     .user-input-container {
-      background-color: turquoise;
-      padding: 20px;
-      border-radius: 8px;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
-    .user-list-container {
-      background-color: turquoise;
-      padding: 20px;
-      border-radius: 8px;
-      margin-bottom: 20px;
+
+    input[type="text"] {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-family: "Press Start 2P", system-ui;
+    }
+
+    .user-input-container button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      background-color: #5776ff;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .user-input-container button:hover {
+      background-color: #0004ff;
     }
 
     my-item  {
@@ -57,14 +77,24 @@ class ExampleEvent extends DDD {
       background-color: #0004ff;
     }
 
-    input[type="text"] {
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
+    .create-party-button {
+      margin-top: 20px;
+      text-align: center;
     }
-    rpg-character {
-      display: inline-block;
-      margin-right: 10px;
+
+    .create-party-button button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .create-party-button button:hover {
+      background-color: #45a049;
     }
   `;
 
@@ -73,7 +103,6 @@ class ExampleEvent extends DDD {
     this.items = [];
     this.userInput = ''; 
   }
-  
 
   addItem() {
     const randomNumber = globalThis.crypto.getRandomValues(new Uint32Array(1))[0];
@@ -96,36 +125,46 @@ class ExampleEvent extends DDD {
 
   handleInputChange(event) {
     this.userInput = event.target.value.slice(0, 10); // Limit input to 10 characters
-  
   }
 
-  targetClicked(e) {
-    const userId = parseInt(e.target.closest('my-item').getAttribute('data-id'));
-    this.deleteUser(userId);
-    
+  renderCreatePartyButton() {
+    if (this.items.length >= 2) {
+      return html`
+        <div class="create-party-button">
+          <button @click="${this.createParty}">Create Party</button>
+        </div>
+      `;
+    } else {
+      return html``;
+    }
+  }
+
+  createParty() {
+    // Logic for creating party goes here
+    console.log("Party created!");
   }
 
   render() {
     return html`
       <div class="user-list-container">
         <div class="user-input-container">
-        <input type="text" placeholder="Enter Username" .value="${this.userInput}" @input="${this.handleInputChange}">
-        <button @click="${this.addItem}" ?disabled="${this.userInput.length === 0 || this.userInput.length > 10}">Add user</button>
+          <input type="text" placeholder="Enter Username" .value="${this.userInput}" @input="${this.handleInputChange}">
+          <button @click="${this.addItem}" ?disabled="${this.userInput.length === 0 || this.userInput.length > 10}">Add user</button>
+        </div>
+        <div class="user-list">
+          ${this.items.map((item) => html`
+            <my-item data-id="${item.id}">
+              <rpg-character sprite="${item.sprite}" .animate="${true}"></rpg-character>
+              <div class="content">
+                <strong>${item.content}</strong>
+                ${item.coolness}
+              </div>
+              <button class="delete-button" @click="${() => this.deleteUser(item.id)}">Delete</button>
+            </my-item>
+          `)}
+        </div>
+        ${this.renderCreatePartyButton()}
       </div>
-      <div>
-        ${this.items.map((item) => html`
-          <my-item data-id="${item.id}">
-            <rpg-character sprite="${item.sprite}" .animate="${true}"></rpg-character>
-            <div class="content">
-              <strong>${item.content}</strong>
-              ${item.coolness}
-            </div>
-            <button class="delete-button" @click="${() => this.deleteUser(item.id)}">Delete</button>
-          </my-item>
-        `)}
-      </div>
-      </div>
-      <!-- Use DDD component -->
       <DDD></DDD>
     `;
   }
