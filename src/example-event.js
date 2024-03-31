@@ -54,7 +54,7 @@ class ExampleEvent extends DDD {
       margin-bottom: 10px;
       border-radius: 8px;
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-      width: 55%;
+      width: 65%;
     }
 
     my-item .content {
@@ -87,15 +87,16 @@ class ExampleEvent extends DDD {
       padding: 10px 20px;
       border: none;
       border-radius: 4px;
-      background-color: #4CAF50;
+      background-color: #5776ff;
       color: white;
       font-size: 16px;
       cursor: pointer;
       transition: background-color 0.3s;
+      font-family: "Press Start 2P", system-ui;
     }
 
     .create-party-button button:hover {
-      background-color: #45a049;
+      background-color: #0004ff;
     }
   `;
 
