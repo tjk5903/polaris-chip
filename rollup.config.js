@@ -50,6 +50,11 @@ export default {
       ],
       plugins: [
         [
+          html({
+            minify: true,
+            injectServiceWorker: true,
+            serviceWorkerPath: 'dist/sw.js',
+          }),
           require.resolve('babel-plugin-template-html-minifier'),
           {
             modules: { lit: ['html', { name: 'css', encapsulation: 'style' }] },
