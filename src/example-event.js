@@ -1,5 +1,6 @@
 import { html, css } from 'lit';
 import { DDD } from "@lrnwebcomponents/d-d-d/d-d-d.js";
+import ConfettiGenerator from 'confetti-js';
 import "@lrnwebcomponents/rpg-character/rpg-character.js";
 
 class ExampleEvent extends DDD {
@@ -140,10 +141,22 @@ class ExampleEvent extends DDD {
   }
 
   createParty() {
-    // Logic for creating party goes here
-    console.log("Party created!");
-  }
+    const confettiSettings = {
+      target: 'confetti-container',
+      max: 100,
+      size: 2,
+      animate: true,
+      props: ['circle', 'square', 'triangle', 'line'],
+      colors: [[165,104,246],[230,61,135],[0,199,228],[253,214,126]]
+    };
+    const confetti = new ConfettiGenerator(confettiSettings);
+    confetti.render();
 
+      // Stop confetti after 5 seconds
+      setTimeout(() => {
+        confetti.clear();
+      }, 5000);
+    };
   render() {
     return html`
       <div class="user-list-container">
@@ -165,6 +178,7 @@ class ExampleEvent extends DDD {
         </div>
         ${this.renderCreatePartyButton()}
       </div>
+      <div id="confetti-container"></div>
       <DDD></DDD>
     `;
   }
