@@ -1,6 +1,8 @@
-import { html, css } from 'lit';
+import { html, css, LitElement } from 'lit';
+import { DDD } from "@lrnwebcomponents/d-d-d/d-d-d.js";
+import "@lrnwebcomponents/rpg-character/rpg-character.js";
 
-class ExampleEvent extends DDD {
+class ExampleEvent extends LitElement {
   static properties = {
     items: { type: Array },
     userInput: { type: String } // Add property for user input
@@ -47,6 +49,10 @@ class ExampleEvent extends DDD {
       border: 1px solid #ccc;
       border-radius: 4px;
     }
+    rpg-character {
+      display: inline-block;
+      margin-right: 10px;
+    }
   `;
 
   constructor() {
@@ -76,24 +82,27 @@ class ExampleEvent extends DDD {
   }
 
   handleInputChange(event) {
-    this.userInput = event.target.value.slice(0, 20); // Limit input to 20 characters
+    this.userInput = event.target.value.slice(0, 10); // Limit input to 10 characters
   
   }
 
   targetClicked(e) {
     const userId = parseInt(e.target.closest('my-item').getAttribute('data-id'));
     this.deleteUser(userId);
+    
   }
 
   render() {
     return html`
-     <div>
-      <input type="text" placeholder="Enter Username" .value="${this.userInput}" @input="${this.handleInputChange}">
-      <button @click="${this.addItem}" ?disabled="${this.userInput.length === 0 || this.userInput.length > 20}">Add user</button>
-     </div>
-     <div>
+      <div>
+        <input type="text" placeholder="Enter Username" .value="${this.userInput}" @input="${this.handleInputChange}">
+        <button @click="${this.addItem}" ?disabled="${this.userInput.length === 0 || this.userInput.length > 10}">Add user</button>
+      </div>
+      <div>
         ${this.items.map((item) => html`
           <my-item data-id="${item.id}">
+            <!-- Use rpg-character component to display character -->
+            <rpg-character sprite="${item.sprite}" .animate="${true}"></rpg-character>
             <div class="content">
               <strong>${item.content}</strong>
               ${item.coolness}
@@ -102,6 +111,8 @@ class ExampleEvent extends DDD {
           </my-item>
         `)}
       </div>
+      <!-- Use DDD component -->
+      <DDD></DDD>
     `;
   }
 }
