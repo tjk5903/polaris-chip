@@ -25,6 +25,18 @@ export default {
       injectServiceWorker: true,
       serviceWorkerPath: 'dist/sw.js',
     }),
+    copy({
+      targets: [
+        {
+          src: 'node_modules/@lrnwebcomponents/rpg-character/lib',
+          dest: 'dist',
+        },
+        {
+          src: 'node_modules/@lrnwebcomponents/simple-icon/lib/svgs',
+          dest: 'dist',
+        },
+      ],
+    }),
     /** Resolve bare module imports */
     nodeResolve(),
     /** Minify JS */
@@ -51,11 +63,6 @@ export default {
       ],
       plugins: [
         [
-          html({
-            minify: true,
-            injectServiceWorker: true,
-            serviceWorkerPath: 'dist/sw.js',
-          }),
           require.resolve('babel-plugin-template-html-minifier'),
           {
             modules: { lit: ['html', { name: 'css', encapsulation: 'style' }] },
@@ -70,18 +77,6 @@ export default {
             },
           },
         ],
-      ],
-    }),
-    copy({
-      targets: [
-        {
-          src: 'node_modules/@lrnwebcomponents/rpg-character/lib',
-          dest: 'dist',
-        },
-        {
-          src: 'node_modules/@lrnwebcomponents/simple-icon/lib/svgs',
-          dest: 'dist',
-        },
       ],
     }),
     /** Create and inject a service worker */

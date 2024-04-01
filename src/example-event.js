@@ -153,13 +153,13 @@ class ExampleEvent extends DDD {
 
   makeItRain() {
     import("@lrnwebcomponents/multiple-choice/lib/confetti-container.js").then(
-      (module) => {
-        setTimeout(() => {
-          this.shadowRoot.querySelector("#confetti").setAttribute("popped", "");
-        }, 0);
-      }
+        (module) => {
+            setTimeout(() => {
+                this.shadowRoot.querySelector("#confetti").setAttribute("popped", "");
+            }, 0);
+        }
     );
-  }
+}
   render() {
     return html`
       <div class="user-list-container">
