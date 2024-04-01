@@ -1,6 +1,8 @@
 import { html, css } from 'lit';
 import { DDD } from "@lrnwebcomponents/d-d-d/d-d-d.js";
 import "@lrnwebcomponents/rpg-character/rpg-character.js";
+import "@lrnwebcomponents/multiple-choice/lib/confetti-container.js";
+
 
 class ExampleEvent extends DDD {
   static properties = {
@@ -97,6 +99,15 @@ class ExampleEvent extends DDD {
     .create-party-button button:hover {
       background-color: #0004ff;
     }
+    #confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      animation: 5s;
+    }
   `;
 
   constructor() {
@@ -140,25 +151,14 @@ class ExampleEvent extends DDD {
     }
   }
 
-  createParty() {
-    import('confetti-js').then(module => {
-      const ConfettiGenerator = module.default;
-      const confettiSettings = {
-        target: 'confetti-container',
-        max: 100,
-        size: 2,
-        animate: true,
-        props: ['circle', 'square', 'triangle', 'line'],
-        colors: [[165,104,246],[230,61,135],[0,199,228],[253,214,126]]
-      };
-    const confetti = new ConfettiGenerator(confettiSettings);
-    confetti.render();
-
-      // Stop confetti after 5 seconds
-      setTimeout(() => {
-        confetti.clear();
-      }, 5000);
-    });
+  makeItRain() {
+    import("@lrnwebcomponents/multiple-choice/lib/confetti-container.js").then(
+      (module) => {
+        setTimeout(() => {
+          this.shadowRoot.querySelector("#confetti").setAttribute("popped", "");
+        }, 0);
+      }
+    );
   }
   render() {
     return html`
@@ -181,7 +181,7 @@ class ExampleEvent extends DDD {
         </div>
         ${this.renderCreatePartyButton()}
       </div>
-      <div id="confetti-container"></div>
+      <confetti-container id="confetti"></confetti-container>
       <DDD></DDD>
     `;
   }
