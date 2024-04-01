@@ -182,7 +182,6 @@ class ExampleEvent extends DDD {
         ${this.renderCreatePartyButton()}
       </div>
       <confetti-container id="confetti"></confetti-container>
-      <DDD></DDD>
     `;
   }
 }
