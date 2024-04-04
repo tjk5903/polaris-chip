@@ -101,6 +101,7 @@ class ExampleEvent extends DDD {
     }
     #confetti {
       position: fixed;
+      text-align: center;
       top: 0;
       left: 0;
       width: 100%;
@@ -128,6 +129,7 @@ class ExampleEvent extends DDD {
     this.items = [...this.items, item];
     this.userInput = ''; // Clear user input after adding user
     this.requestUpdate();
+    this.userArray.push(user);
   }
 
   deleteUser(id) {
@@ -153,15 +155,16 @@ class ExampleEvent extends DDD {
 
   makeItRain() {
     import("@lrnwebcomponents/multiple-choice/lib/confetti-container.js").then(
-        (module) => {
-            setTimeout(() => {
-                this.shadowRoot.querySelector("#confetti").setAttribute("popped", "");
-            }, 0);
+      (module) => {
+        setTimeout(() => {
+          this.shadowRoot.querySelector("#confetti").setAttribute("popped", "");
+        }, 0);
         }
     );
 }
   render() {
     return html`
+    <confetti-container id="confetti">
       <div class="user-list-container">
         <div class="user-input-container">
           <input type="text" placeholder="Enter Username" .value="${this.userInput}" @input="${this.handleInputChange}">
@@ -181,7 +184,7 @@ class ExampleEvent extends DDD {
         </div>
         ${this.renderCreatePartyButton()}
       </div>
-      <confetti-container id="confetti"></confetti-container>
+      </confetti-container>
     `;
   }
 }
