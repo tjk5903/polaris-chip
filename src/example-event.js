@@ -3,11 +3,11 @@ import { DDD } from "@lrnwebcomponents/d-d-d/d-d-d.js";
 import "@lrnwebcomponents/rpg-character/rpg-character.js";
 import "@lrnwebcomponents/multiple-choice/lib/confetti-container.js";
 
-
 class ExampleEvent extends DDD {
   static properties = {
     items: { type: Array },
-    userInput: { type: String }
+    userInput: { type: String },
+    partySaved: { type: Boolean }
   }
 
   static styles = css`
@@ -20,6 +20,7 @@ class ExampleEvent extends DDD {
       padding: 20px;
       border-radius: 8px;
       margin-bottom: 20px;
+      position: relative; /* Required for positioning the party saved bubble */
     }
 
     .user-input-container {
@@ -52,10 +53,11 @@ class ExampleEvent extends DDD {
       display: block;
       background-color: seashell;
       padding: 16px;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
+      margin: auto;
       border-radius: 8px;
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-      width: 65%;
+      width: 45%;
     }
 
     my-item .content {
@@ -99,6 +101,18 @@ class ExampleEvent extends DDD {
     .create-party-button button:hover {
       background-color: #0004ff;
     }
+
+    .party-saved-bubble {
+      position: absolute;
+      top: -30px; /* Adjust as needed */
+      left: calc(50% - 40px); /* Adjust as needed */
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
     #confetti {
       position: fixed;
       text-align: center;
@@ -114,7 +128,8 @@ class ExampleEvent extends DDD {
   constructor() {
     super();
     this.items = [];
-    this.userInput = ''; 
+    this.userInput = '';
+    this.partySaved = false;
   }
 
   addItem() {
@@ -123,7 +138,7 @@ class ExampleEvent extends DDD {
     const item = {
       id: randomNumber,
       title: "Cool",
-      content: this.userInput, 
+      content: this.userInput,
       coolness: "added"
     }
     this.items = [...this.items, item];
@@ -146,6 +161,7 @@ class ExampleEvent extends DDD {
       return html`
         <div class="create-party-button">
           <button @click="${this.createParty}">Create Party</button>
+          ${this.renderPartySavedBubble()} <!-- Render the party saved bubble -->
         </div>
       `;
     } else {
@@ -153,37 +169,52 @@ class ExampleEvent extends DDD {
     }
   }
 
-  makeItRain() {
+  createParty() {
     import("@lrnwebcomponents/multiple-choice/lib/confetti-container.js").then(
       (module) => {
         setTimeout(() => {
           this.shadowRoot.querySelector("#confetti").setAttribute("popped", "");
+          this.partySaved = true;
+          setTimeout(() => {
+            this.partySaved = false;
+          }, 2000); // 2000 milliseconds delay (adjust as needed)
         }, 0);
-        }
+      }
     );
-}
+  }
+
+  renderPartySavedBubble() {
+    if (this.partySaved) {
+      return html`
+        <div class="party-saved-bubble">Party Saved!</div>
+      `;
+    } else {
+      return html``;
+    }
+  }
+
   render() {
     return html`
-    <confetti-container id="confetti">
-      <div class="user-list-container">
-        <div class="user-input-container">
-          <input type="text" placeholder="Enter Username" .value="${this.userInput}" @input="${this.handleInputChange}">
-          <button @click="${this.addItem}" ?disabled="${this.userInput.length === 0 || this.userInput.length > 10}">Add user</button>
+      <confetti-container id="confetti">
+        <div class="user-list-container">
+          <div class="user-input-container">
+            <input type="text" placeholder="Enter Username" .value="${this.userInput}" @input="${this.handleInputChange}">
+            <button @click="${this.addItem}" ?disabled="${this.userInput.length === 0 || this.userInput.length > 10}">Add user</button>
+          </div>
+          <div class="user-list">
+            ${this.items.map((item) => html`
+              <my-item data-id="${item.id}">
+                <rpg-character sprite="${item.sprite}" .animate="${true}"></rpg-character>
+                <div class="content">
+                  <strong>${item.content}</strong>
+                  ${item.coolness}
+                </div>
+                <button class="delete-button" @click="${() => this.deleteUser(item.id)}">Delete</button>
+              </my-item>
+            `)}
+          </div>
+          ${this.renderCreatePartyButton()}
         </div>
-        <div class="user-list">
-          ${this.items.map((item) => html`
-            <my-item data-id="${item.id}">
-              <rpg-character sprite="${item.sprite}" .animate="${true}"></rpg-character>
-              <div class="content">
-                <strong>${item.content}</strong>
-                ${item.coolness}
-              </div>
-              <button class="delete-button" @click="${() => this.deleteUser(item.id)}">Delete</button>
-            </my-item>
-          `)}
-        </div>
-        ${this.renderCreatePartyButton()}
-      </div>
       </confetti-container>
     `;
   }
