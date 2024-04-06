@@ -20,7 +20,7 @@ class ExampleEvent extends DDD {
       padding: 20px;
       border-radius: 8px;
       margin-bottom: 20px;
-      position: relative; /* Required for positioning the party saved bubble */
+      position: relative; 
     }
 
     .user-input-container {
@@ -104,13 +104,12 @@ class ExampleEvent extends DDD {
 
     .party-saved-bubble {
       position: absolute;
-      top: -30px; /* Adjust as needed */
-      left: calc(50% - 40px); /* Adjust as needed */
       background-color: #4CAF50;
       color: white;
-      padding: 10px;
-      border-radius: 8px;
+      padding: 6px;
+      border-radius: 4px;
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+      font-family: "Press Start 2P", system-ui;
     }
 
     #confetti {
@@ -134,7 +133,7 @@ class ExampleEvent extends DDD {
 
   addItem() {
     const randomNumber = globalThis.crypto.getRandomValues(new Uint32Array(1))[0];
-
+    
     const item = {
       id: randomNumber,
       title: "Cool",
@@ -145,6 +144,7 @@ class ExampleEvent extends DDD {
     this.userInput = ''; // Clear user input after adding user
     this.requestUpdate();
     this.userArray.push(user);
+    
   }
 
   deleteUser(id) {
@@ -153,7 +153,8 @@ class ExampleEvent extends DDD {
   }
 
   handleInputChange(event) {
-    this.userInput = event.target.value.slice(0, 10); // Limit input to 10 characters
+    this.userInput = event.target.value.slice(0, 10);
+    this.userInput = event.target.value.replace(/[^a-z0-9]/g, '');
   }
 
   renderCreatePartyButton() {
@@ -177,7 +178,7 @@ class ExampleEvent extends DDD {
           this.partySaved = true;
           setTimeout(() => {
             this.partySaved = false;
-          }, 2000); // 2000 milliseconds delay (adjust as needed)
+          }, 2000); 
         }, 0);
       }
     );
