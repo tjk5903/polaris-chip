@@ -29,7 +29,7 @@ class ExampleEvent extends DDD {
 
     input[type="text"] {
       padding: 10px;
-      border: 1px solid #ccc;
+      border: 1px solid seashell;
       border-radius: 4px;
       font-family: "Press Start 2P", system-ui;
     }
@@ -48,16 +48,21 @@ class ExampleEvent extends DDD {
     .user-input-container button:hover {
       background-color: #0004ff;
     }
+    .user-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center
+    }
 
     my-item  {
       display: block;
       background-color: seashell;
       padding: 16px;
       margin-bottom: 20px;
-      margin: auto;
       border-radius: 8px;
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-      width: 45%;
+      width: calc(25% - 20px);
+      margin-right: 120px;
     }
 
     my-item .content {
@@ -75,6 +80,7 @@ class ExampleEvent extends DDD {
       padding: 8px 12px;
       cursor: pointer;
       transition: background-color 0.3s;
+      justify-content: center;
     }
 
     my-item .delete-button:hover {
@@ -106,6 +112,7 @@ class ExampleEvent extends DDD {
       position: absolute;
       background-color: #4CAF50;
       color: white;
+      bottom: 20px;
       padding: 6px;
       border-radius: 4px;
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
@@ -129,6 +136,11 @@ class ExampleEvent extends DDD {
     this.items = [];
     this.userInput = '';
     this.partySaved = false;
+    this.backendArray = [];
+  }
+  connectedCallback() {
+    super.connectedCallback();
+    this.backendArray = [...this.items];
   }
 
   addItem() {
@@ -141,6 +153,7 @@ class ExampleEvent extends DDD {
       coolness: "added"
     }
     this.items = [...this.items, item];
+    this.backendArray = [...this.items]; 
     this.userInput = ''; // Clear user input after adding user
     this.requestUpdate();
     this.userArray.push(user);
@@ -149,6 +162,7 @@ class ExampleEvent extends DDD {
 
   deleteUser(id) {
     this.items = this.items.filter(item => item.id !== id);
+    this.backendArray = [...this.items];
     this.requestUpdate();
   }
 
